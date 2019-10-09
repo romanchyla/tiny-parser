@@ -19,6 +19,17 @@ class Test(unittest.TestCase):
                                  ('(one (two three))', ''),
                                  ('(one (two or three))', ''),
                                  ('(one (two or three and four))', ''),
+                                 ('one (two three)', ''),
+                                 ('(one two) three', ''),
+                                 ('(polarimetry and (asteroid or comet))', ''),
+                                 ('(polarimetry and (asteroid or comet)) or foo', ''),
+                                 ('(polarimetry and (asteroid or comet)) or (foo)', ''),
+                                 ('(polarimetry and (asteroid or comet)) or ((foo) (bar))', ''),
+                                 ('(polarimetry and (asteroid or comet)) or ((foo) or (bar))', ''),
+                                 ('((active and asteroid) or centaur or kuiper or transneptunian)', ''),
+                                 ('((active and asteroid) or (foo) or centaur or kuiper or transneptunian)', ''),
+                                 ('(polarimetry and (asteroid or comet)) or ((main and belt and comet) or (active and asteroid) or centaur or kuiper or transneptunian)', ''),
+                                 ('(polarimetry and (asteroid or comet)) or ((main and belt and comet) or (active and asteroid) or centaur or kuiper or transneptunian) or (tail and comet) or (coma and comet) or (asteroid and albedo) or (surface and (asteroid or comet))', '')
                                  ]:
             
             print 'query:' , test
