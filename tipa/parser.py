@@ -6,13 +6,16 @@ from platform import node
 
 # token +token (token -(token and token))
 
-grammar=r"""
+grammar = r"""
 
     
-    start: clause (clause)*
+    start: clause (operator? clause)*
     
-    clause: ("(" clause ")") 
-        | query operator? clause*
+    clause: ("(" clause operator? query? ")")+        
+        | (query operator clause*)
+        | ("(" clause (operator clause)+ ")")+
+        | (query clause*)+
+
     
     query: qterm+
     
@@ -25,7 +28,9 @@ grammar=r"""
     
     anyterm: /[^)^\] \(]+/
     
-    operator: "and" | "AND" | "or" | "OR" | "not" | "NOT" | "+" | "-"
+    operator: OPERATOR
+
+    OPERATOR.2: "and" | "AND" | "or" | "OR" | "not" | "NOT" | "AND NOT" | "and not"
     
 
     %import common.LETTER
